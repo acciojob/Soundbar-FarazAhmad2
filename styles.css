@@ -1,1 +1,26 @@
 /*  your css code here. If applicable */
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #a164df;
+}
+
+#buttons {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 30px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  background-color: #663399;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
