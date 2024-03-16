@@ -1,31 +1,33 @@
-//your JS code here. If required.
-document.addEventListener('DOMContentLoaded',() => {
-  const btns = document.querySelectorAll('.btn');
-  const stopButton = document.querySelector('.stop');
+document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".btn");
+  const stopButton = document.querySelector(".stop");
+  const soundsFolder = "./sounds/";
+  let playingAudio = null;
 
-  let playingSound = null;
-  btns.forEach(btn => {
-    let soundFile = `./sounds/${btn.textContent}.mp3`;
-    btn.addEventListener('click', () => {
-      playSound(soundFile);
+  buttons.forEach(button => {
+    button.addEventListener("click", function() {
+      const soundName = this.textContent.trim();
+      playSound(soundName);
     });
-  })
+  });
 
-  stopButton.addEventListener('click', () => {
-    stopAllSound();
-  })
+  stopButton.addEventListener("click", function() {
+    stopAllSounds();
+  });
 
-  function stopAllSound() {
-    if (playingSound != null) {
-      playingSound.pause();
-      playingSound = null;
+  function playSound(soundName) {
+    stopAllSounds();
+    const soundFile = `${soundsFolder}${soundName}.mp3`;
+    playingAudio = new Audio(soundFile);
+    playingAudio.play();
+    document.body.appendChild(playingAudio); // Append audio element to the body
+  }
+
+  function stopAllSounds() {
+    if (playingAudio !== null) {
+      playingAudio.pause();
+      document.body.removeChild(playingAudio); // Remove audio element from the body
+      playingAudio = null;
     }
   }
-
-  function playSound(soundFile) {
-    stopAllSound();
-    sound = new Audio (soundFile);
-    playingSound = sound;
-    playingSound.play();
-  }
-})
+});
